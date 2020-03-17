@@ -62,6 +62,19 @@ namespace Ladeskab.Test
 
         }
 
+        [Test]
+        public void OnDoorOpen_Event_counter()
+        {
+            int numValues = 0;
+            _uut.DoorEvent += (o, args) => numValues++;
+
+            _uut.OnDoorOpen();
+            _uut.OnDoorOpen();
+            _uut.OnDoorOpen();
+
+            Assert.That(numValues, Is.EqualTo(3));
+        }
+
         //[Test]
         //public void CheckOnDoorIsOpenEvent()
         //{
