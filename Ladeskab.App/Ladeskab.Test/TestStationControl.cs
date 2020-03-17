@@ -16,7 +16,7 @@ namespace Ladeskab.Test
         private StationControl _uut;
         private IDoor _door;
         private IDisplay _display;
-        private IRFIDReader _rfidReader;
+        private IRfidReader _rfidReader;
         private UsbChargerSimulator _usbChargerSimulator;
 
         [SetUp]
@@ -24,7 +24,7 @@ namespace Ladeskab.Test
         {
             _door = Substitute.For<IDoor>();
             _display = Substitute.For<IDisplay>();
-            _rfidReader = Substitute.For<IRFIDReader>();
+            _rfidReader = Substitute.For<IRfidReader>();
             _usbChargerSimulator = Substitute.For<UsbChargerSimulator>();
 
             _uut = new StationControl(_door, _display, _rfidReader, _usbChargerSimulator);
