@@ -14,12 +14,12 @@ namespace Ladeskab.Test
     {
         public Door _uut;
         public EventArgs _receivedEventArgs;
+        public StationControl _Control;
 
         [SetUp]
         public void Setup()
         {
             _uut = new Door();
-
 
             //Tjekker på events
             _receivedEventArgs = null;
