@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ladeskab
 {
-    interface IDisplay
+    public interface IDisplay
     {
         // kald som StationControl skal kunne foretage på et display
         void ConnectPhoneRequest();
