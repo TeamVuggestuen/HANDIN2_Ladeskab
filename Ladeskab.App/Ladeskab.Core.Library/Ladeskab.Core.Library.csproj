@@ -75,12 +75,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Ladeskab.App\Ladeskab.App.csproj">
-      <Project>{0ae39305-690e-4bab-b591-a14667e2dfa9}</Project>
-      <Name>Ladeskab.App</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
