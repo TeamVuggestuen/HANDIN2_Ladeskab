@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using NSubstitute;
 
 
 namespace Ladeskab.Test
@@ -92,8 +93,16 @@ namespace Ladeskab.Test
         //public void CheckOnDoorIsOpenEvent()
         //{
 
-        //    _uut.OnDoorClosed();
-        //    Assert.That(_receivedEventArgs, Is.Ordered);
+        //    // Arrange
+        //    _uut = Substitute.For<Door>();
+            
+        //    //Act
+        //    var wasCalledClose = false;
+        //    _uut.DoorEvent += (sender, args) => wasCalledClose = true;
+        //    _uut.DoorEvent += Raise.EventWith(new DoorEventArgs()); // Kan ikke invoke vores event sådan.. 
+
+        //    //Assert
+        //    Assert.True(wasCalledClose);
         //}
     }
 
