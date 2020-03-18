@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using Ladeskab.Core.Library.Interfaces;
 
 namespace Ladeskab
 {
@@ -19,7 +20,7 @@ namespace Ladeskab
 
         // member variables
         private LadeskabState _state;
-        public IUsbCharger _charger;
+        public IChargeControl _chargeControl;
         public IDoor _Door;
         public IDisplay _Display;
         private int _oldId;
@@ -28,7 +29,7 @@ namespace Ladeskab
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
 
 
-        public StationControl(IDoor Door, IDisplay display, IRfidReader RfidReader, IUsbCharger usbCharger)
+        public StationControl(IDoor Door, IDisplay display, IRfidReader RfidReader, IChargeControl chargeControl)
         {
 
             Door.DoorEvent += HandleDoorEvent;                  //attach to door event
@@ -36,10 +37,9 @@ namespace Ladeskab
 
             RfidReader.RfidEvent += HandleRfidEvent;            //attach to rfid event
 
-            usbCharger.CurrentValueEvent += HandleUsbCharger;   //attach to USB event
-            _charger = usbCharger;
-
             _Display = display;
+
+            _chargeControl = chargeControl;
         }
 
 
@@ -129,12 +129,6 @@ namespace Ladeskab
         #endregion
 
 
-        private void HandleUsbCharger(object sender, CurrentEventArgs e)
-        {
-            // VED IKKE LIGE HVAD SKAL HENVISE TIL HER
-        }
-
-
         #region rfidDetected (Eventhandler)
 
         // Eksempel på event handler for eventet "RFID Detected" fra tilstandsdiagrammet for klassen
@@ -144,21 +138,24 @@ namespace Ladeskab
             {
                 case LadeskabState.Available:
                     // Check for ladeforbindelse
-                    if (_charger.Connected)
+                    if (_chargeControl.isConnected())
                     {
                         _Door.LockDoor();
-                        _charger.StartCharge();
+                        _chargeControl.StartCharge();
                         _oldId = id;
                         using (var writer = File.AppendText(logFile))
                         {
+                            //_Display.displayCommands(DateTime.Now.ToLongDateString() + ": Skab låst med RFID: " + id.ToString());
                             writer.WriteLine(DateTime.Now + ": Skab låst med RFID: {0}", id);
                         }
 
+                        //_Display.displayCommands("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
                         Console.WriteLine("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
                         _state = LadeskabState.Locked;
                     }
                     else
                     {
+                        //_Display.displayCommands("Din telefon er ikke ordentlig tilsluttet. Prøv igen.");
                         Console.WriteLine("Din telefon er ikke ordentlig tilsluttet. Prøv igen.");
                     }
 
@@ -172,18 +169,21 @@ namespace Ladeskab
                     // Check for correct ID
                     if (id == _oldId)
                     {
-                        _charger.StopCharge();
+                        _chargeControl.StopCharge();
                         _Door.UnlockDoor();
                         using (var writer = File.AppendText(logFile))
                         {
+                            //_Display.displayCommands(DateTime.Now.ToLongDateString() + ": Skab låst op med RFID: " + id.ToString());
                             writer.WriteLine(DateTime.Now + ": Skab låst op med RFID: {0}", id);
                         }
 
+                        //_Display.displayCommands("Tag din telefon ud af skabet og luk døren");
                         Console.WriteLine("Tag din telefon ud af skabet og luk døren");
                         _state = LadeskabState.Available;
                     }
                     else
                     {
+                        //_Display.displayCommands("Forkert RFID tag");
                         Console.WriteLine("Forkert RFID tag");
                     }
 
