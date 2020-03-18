@@ -55,6 +55,13 @@ namespace Ladeskab.Test
         }
 
         [Test]
+        public void lockDoor_doorIsLocked()
+        {
+            _uut.LockDoor();
+            Assert.That(_uut.doorIsLocked, Is.True);
+        }
+
+        [Test]
         public void CheckOnDoorIsClose()
         {
             _uut.OnDoorClosed();

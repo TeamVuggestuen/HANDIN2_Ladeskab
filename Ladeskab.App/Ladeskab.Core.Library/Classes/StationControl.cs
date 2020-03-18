@@ -56,27 +56,27 @@ namespace Ladeskab
                 case LadeskabState.Available:
                     if (!e.DoorClosed)
                     {
-                        _Display.ConnectPhoneRequest();
+                        _Display.displayCommands("Connect phone (and close door(press 'r'))");
                         _state = LadeskabState.DoorOpen;
                     }
                     else
                     {
-                        _Display.Error();
+                        _Display.displayCommands("Error");
                     }
                     break;
                 case LadeskabState.DoorOpen:
                     if (e.DoorClosed)
                     {
-                        _Display.ReadRFIDRequest();
+                        _Display.displayCommands("Read rfid (press 'R')");
                         _state = LadeskabState.Available;
                     }
                     else
                     {
-                        _Display.Error();
+                        _Display.displayCommands("Error");
                     }
                     break;
                 case LadeskabState.Locked:
-                    _Display.DisplayLockerOccupied();
+                    _Display.displayCommands("Locker is occupied");
                     break;
             }
         }

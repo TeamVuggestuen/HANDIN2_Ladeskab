@@ -91,7 +91,7 @@ namespace Ladeskab
 
         public void UnlockDoor()
         {
-            doorIsLocked = true;
+            doorIsLocked = false;
         }
 
         public void LockDoor() // fjern evt if sætningen // nemmere at teste
