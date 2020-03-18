@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Ladeskab;
+using Ladeskab.Core.Library.Classes;
 using NSubstitute;
 
 namespace Ladeskab.Test
@@ -18,6 +19,7 @@ namespace Ladeskab.Test
         private IDisplay _display;
         private IRfidReader _rfidReader;
         private UsbChargerSimulator _usbChargerSimulator;
+        private ChargeControl _chargeControl;
 
         [SetUp]
         public void Setup()
@@ -26,8 +28,9 @@ namespace Ladeskab.Test
             _display = Substitute.For<IDisplay>();
             _rfidReader = Substitute.For<IRfidReader>();
             _usbChargerSimulator = Substitute.For<UsbChargerSimulator>();
+            _chargeControl = Substitute.For<ChargeControl>();
 
-            _uut = new StationControl(_door, _display, _rfidReader, _usbChargerSimulator);
+            _uut = new StationControl(_door, _display, _rfidReader, _chargeControl);
         }
 
         //[Test]

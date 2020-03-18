@@ -5,6 +5,8 @@ using System.Net.Configuration;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Ladeskab.Core.Library.Classes;
+using Ladeskab.Core.Library.Interfaces;
 
 namespace Ladeskab
 {
@@ -17,8 +19,9 @@ namespace Ladeskab
             Display _display = new Display();
             UsbChargerSimulator _charger = new UsbChargerSimulator();
             RfidReader _rfidReader = new RfidReader();
+            ChargeControl _chargeControl = new ChargeControl(_charger, _display);
 
-            StationControl _control = new StationControl(_door, _display, _rfidReader, _charger);
+            StationControl _control = new StationControl(_door, _display, _rfidReader, _chargeControl);
 
             bool finish = false;
 
