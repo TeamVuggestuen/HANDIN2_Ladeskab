@@ -55,13 +55,6 @@ namespace Ladeskab.Test
         }
 
         [Test]
-        public void lockDoor_doorIsLocked()
-        {
-            _uut.LockDoor();
-            Assert.That(_uut.doorIsLocked, Is.True);
-        }
-
-        [Test]
         public void CheckOnDoorIsClose()
         {
             _uut.OnDoorClosed();
@@ -96,13 +89,27 @@ namespace Ladeskab.Test
             Assert.That(numValues, Is.EqualTo(3));
         }
 
+        [Test]
+        public void lockDoor_doorIsLocked()
+        {
+            _uut.LockDoor();
+            Assert.That(_uut.doorIsLocked, Is.True);
+        }
+
+        [Test]
+        public void unlockDoor_doorIsUnLocked()
+        {
+            _uut.UnlockDoor();
+            Assert.That(_uut.doorIsLocked, Is.False);
+        }
+
         //[Test]
         //public void CheckOnDoorIsOpenEvent()
         //{
 
         //    // Arrange
         //    _uut = Substitute.For<Door>();
-            
+
         //    //Act
         //    var wasCalledClose = false;
         //    _uut.DoorEvent += (sender, args) => wasCalledClose = true;
