@@ -60,11 +60,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\ChargeControl.cs" />
     <Compile Include="Classes\Display.cs" />
     <Compile Include="Classes\Door.cs" />
     <Compile Include="Classes\RfidReader.cs" />
     <Compile Include="Classes\StationControl.cs" />
     <Compile Include="Classes\UsbChargerSimulator.cs" />
+    <Compile Include="Interfaces\IChargeControl.cs" />
     <Compile Include="Interfaces\IDisplay.cs" />
     <Compile Include="Interfaces\IDoor.cs" />
     <Compile Include="Interfaces\IRfidReader.cs" />

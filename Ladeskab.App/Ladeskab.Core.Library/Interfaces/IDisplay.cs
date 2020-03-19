@@ -8,15 +8,22 @@ namespace Ladeskab
 {
     public interface IDisplay
     {
-        // kald som StationControl skal kunne foretage på et display
-        void ConnectPhoneRequest();
-        void RemovePhoneRequest();
-        void ReadRFIDRequest();
+        // kald som Controls skal kunne foretage på et display
+        void displayCommands(string command);
 
-        void DisplayConnectionError();
-        void DisplayLockerOccupied();
-        void DisplayRFIDError();
+        #region altern
 
-        void Error();
+        //void ConnectPhoneRequest();
+        //void RemovePhoneRequest();
+        //void ReadRFIDRequest();
+
+        //void DisplayConnectionError();
+        //void DisplayLockerOccupied();
+        //void DisplayRFIDError();
+
+        //void Error();        
+
+        #endregion
+
     }
 }
