@@ -51,7 +51,7 @@ namespace Ladeskab
                         string idString = System.Console.ReadLine();
 
                         int id = Convert.ToInt32(idString);
-                        _rfidReader.onRfidRead(id); // LAVER FEJL TIL DEN ER IMPLEMENTERET
+                        _rfidReader.onRfidRead(id); 
                         break;
 
                     default:
