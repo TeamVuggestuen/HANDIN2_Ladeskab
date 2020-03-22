@@ -12,30 +12,31 @@ namespace Ladeskab.Test
     public class TestRfidReader
     {
 
-        //public RfidReader _uut;
+        public RfidReader _uut;
+        public IRfidReader Reader;
 
-        //[SetUp]
-        //public void Setup()
-        //{
-        //    _uut = new RfidReader();
 
-        //}
+        [SetUp]
+        public void Setup()
+        {
+            _uut = new RfidReader();
 
-        //[Test]
-        //public void RfidReader_event_OnRfidDetected()
-        //{
-        //    //Arrange
-        //      IRfidReader _RfidReader = Substitute.For<IRfidReader>();
-        //      int numValues = 0;
+        }
 
-        //    //Act    
-        //    _RfidReader.RfidEvent += (sender, args) => numValues++;
-        //    _RfidReader.onRfidRead(123);
-        //    _RfidReader.onRfidRead(123);
+        [Test]
+        public void RfidReader_event_OnRfidDetected()
+        {
+            //Arrange
+            int numValues = 0;
+            _uut.RfidEvent += (o, args) => numValues++;
             
+            //Act    
+            _uut.onRfidRead(123);
+            _uut.onRfidRead(123);
+            _uut.onRfidRead(123);
 
-        //    //Assert
-        //    Assert.That(numValues, Is.EqualTo(2));
-        //}
+            //Assert
+            Assert.That(numValues, Is.EqualTo(3));
+        }
     }
 }

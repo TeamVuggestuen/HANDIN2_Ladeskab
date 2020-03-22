@@ -14,29 +14,36 @@ namespace Ladeskab.Test
     [TestFixture]
     public class TestStationControl
     {
-        private StationControl _uut;
-        private IDoor _door;
-        private IDisplay _display;
-        private IRfidReader _rfidReader;
-        private UsbChargerSimulator _usbChargerSimulator;
-        private ChargeControl _chargeControl;
+        //private StationControl _uut;
+        //private Door _door;
+        //private Display _display;
+        //private RfidReader _rfidReader;
+        //private UsbChargerSimulator _usbChargerSimulator;
+        //private ChargeControl _chargeControl;
 
-        [SetUp]
-        public void Setup()
-        {
-            _door = Substitute.For<IDoor>();
-            _display = Substitute.For<IDisplay>();
-            _rfidReader = Substitute.For<IRfidReader>();
-            _usbChargerSimulator = Substitute.For<UsbChargerSimulator>();
-            _chargeControl = Substitute.For<ChargeControl>();
+        //[SetUp]
+        //public void Setup()
+        //{
+        //    _door = Substitute.For<Door>();
+        //    _display = Substitute.For<Display>();
+        //    _rfidReader = Substitute.For<RfidReader>();
+        //    _usbChargerSimulator = Substitute.For<UsbChargerSimulator>();
+        //    _chargeControl = Substitute.For<ChargeControl>();
 
-            _uut = new StationControl(_door, _display, _rfidReader, _chargeControl);
-        }
+        //    _uut = new StationControl(_door, _display, _rfidReader, _chargeControl);
+        //}
 
         //[Test]
         //public void Ladeskab_teststate()
         //{
-        //    Assert.That(_uut. Is.False);
+        //    //Arrange
+
+
+        //    //Act
+        //    _door.OnDoorOpen();
+            
+        //    //Assert
+        //    Assert.That(_display. Is.False);
         //}
 
 
