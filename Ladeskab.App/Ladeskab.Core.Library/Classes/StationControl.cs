@@ -40,6 +40,8 @@ namespace Ladeskab
             _Display = display;
 
             _chargeControl = chargeControl;
+
+            _state = LadeskabState.Available;
         }
 
 
@@ -56,7 +58,7 @@ namespace Ladeskab
                 case LadeskabState.Available:
                     if (!e.DoorClosed)
                     {
-                        _Display.displayCommands("Connect phone (and close door(press 'r'))");
+                        _Display.displayCommands("Connect phone (and close door(press 'C'))");
                         _state = LadeskabState.DoorOpen;
                     }
                     else
@@ -146,7 +148,7 @@ namespace Ladeskab
                         using (var writer = File.AppendText(logFile))
                         {
                             //writer.WriteLine(DateTime.Now.ToLongDateString() + ": Skab låst med RFID: " + id.ToString());
-                            writer.WriteLine(DateTime.Now + ": Skab låst med RFID: {0}", id);
+                            writer.WriteLine(DateTime.Now.ToLongDateString() + ": Skab låst med RFID: {0}", id);
                         }
 
                         _Display.displayCommands("Skabet er låst og din telefon lades. Brug dit RFID tag til at låse op.");
