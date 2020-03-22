@@ -1,4 +1,5 @@
-﻿using Ladeskab.Core.Library.Interfaces;
+﻿using System.Collections;
+using Ladeskab.Core.Library.Interfaces;
 
 namespace Ladeskab.Core.Library.Classes
 {
@@ -7,15 +8,40 @@ namespace Ladeskab.Core.Library.Classes
         public IUsbCharger _charger;
         public IDisplay _chargerDisplay;
 
+        int temp1 = 0;
+
+        private double oldcurrent { get; set; }
+
         public bool Connected { get; set; }
 
-        public string Errormessage = "Kortslutning. Fjern telefonen.";
+        #region alt
+
+        public bool fullycharged { get; set; }
+
+        // Enum med tilstande
+        private enum ChargerState
+        {
+            Connected,
+            FullyCharged,
+            overload,
+            disconnected
+        };
+
+        private ChargerState _cstate;
+
+        #endregion
+
+        public string Overloadmessage = "Kortslutning. Fjern telefonen.";
+        public string Connectedmessage = "Telefonen er tilsluttet og lader";
+        public string Chargedmessage = "Telefonen er fuldt opladet. Fjern telefonen.";
+
 
         public ChargeControl(IUsbCharger charger, IDisplay chargerDisplay)
         {
             charger.CurrentValueEvent += HandleChargerEvent;
             _charger = charger;
             _chargerDisplay = chargerDisplay;
+            _cstate = ChargerState.disconnected;
         }
 
         private void HandleChargerEvent(object sender, CurrentEventArgs e)
@@ -27,19 +53,73 @@ namespace Ladeskab.Core.Library.Classes
             else if (e.Current > 0 && e.Current <= 5)
             {
                 Connected = true;
-                _chargerDisplay.displayCommands(e.Current.ToString());
+                temp1++;
+                if (temp1==1)
+                {
+                    _chargerDisplay.displayCommands(Chargedmessage);
+                }
+                //_chargerDisplay.displayCommands(Chargedmessage);
+                _cstate = ChargerState.FullyCharged;
+                //oldcurrent = e.Current;
             }
-            else if (e.Current > 5 && e.Current <= 500)
+            else if (e.Current > 5 && e.Current <= 500)    //&& !(5 < oldcurrent && oldcurrent < 500)
             {
                 Connected = true;
-                _chargerDisplay.displayCommands(e.Current.ToString());
+                temp1++;
+                if (temp1 == 1)
+                {
+                    _chargerDisplay.displayCommands(Connectedmessage);
+                }
+                //_chargerDisplay.displayCommands(Connectedmessage);
+                oldcurrent = e.Current;
+                _cstate = ChargerState.Connected;
             }
-            else
+            else if (e.Current > 500)
             {
                 Connected = true;
-                _chargerDisplay.displayCommands(Errormessage);
+                temp1++;
+                if (temp1 == 1)
+                {
+                    _chargerDisplay.displayCommands(Overloadmessage);
+                }
+                //_chargerDisplay.displayCommands(Overloadmessage);
+                _cstate = ChargerState.overload;
+                // oldcurrent = e.Current;
             }
+
+            //switch (_cstate)
+            //{
+            //    case ChargerState.Connected:
+            //        _chargerDisplay.displayCommands(Connectedmessage);
+            //        break;
+            //    case ChargerState.FullyCharged:
+            //        _chargerDisplay.displayCommands(Chargedmessage);
+            //        break;
+            //    case ChargerState.overload:
+            //        _chargerDisplay.displayCommands(Overloadmessage);
+            //        break;
+            //}
+
         }
+
+        #region alt
+
+        //private void HandleChargerEvent(object sender, DoorEventArgs e)
+        //{
+        //    chargerStateChangeDetected(e);
+        //}
+
+        //private void chargerStateChangeDetected(CurrentEventArgs e)
+        //{
+        //    switch (_cstate)
+        //    {
+        //        case ChargerState.Connected:
+        //            _chargerDisplay.displayCommands();
+        //    }
+        //}
+
+        #endregion
+
 
         public bool isConnected()
         {
