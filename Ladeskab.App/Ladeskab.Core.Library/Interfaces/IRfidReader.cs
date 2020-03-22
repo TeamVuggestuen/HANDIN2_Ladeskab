@@ -16,4 +16,7 @@ namespace Ladeskab
         event EventHandler<RfidEventArgs> RfidEvent;
         void onRfidRead(int id);
     }
+    
+
+
 }

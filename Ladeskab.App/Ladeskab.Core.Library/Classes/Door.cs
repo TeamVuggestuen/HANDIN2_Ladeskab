@@ -10,7 +10,7 @@ namespace Ladeskab
     public class Door : IDoor
     {
         // need a display to communicate to user
-        private IDisplay _display;
+        //private IDisplay _display;
 
 
         //door states. Locked is controlled by stationcontrol. Closed is controlled by user (no need for interface description).
