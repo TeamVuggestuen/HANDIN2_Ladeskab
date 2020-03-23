@@ -33,20 +33,20 @@ namespace Ladeskab.Test
             _uut = new StationControl(_door, _display, _rfidReader, _chargeControl);
         }
 
-        [Test]
-        public void Ladeskab_teststate()
-        {
-            //Arrange
-                //Setup
-        _uut.
-            //Act
-            _door.OnDoorOpen();
+        //[Test]
+        //public void Ladeskab_teststate()
+        //{
+        //    //Arrange
+        //        //Setup
+        //_uut.
+        //    //Act
+        //    _door.OnDoorOpen();
             
 
-               //Assert
-            Assert.That(_display.Text, Is.EqualTo("Connect phone (and close door(press 'r'))"));
+        //       //Assert
+        //    Assert.That(_display.Text, Is.EqualTo("Connect phone (and close door(press 'r'))"));
 
-        }
+        //}
 
 
 
