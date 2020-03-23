@@ -9,7 +9,15 @@ namespace Ladeskab
 {
     public class DoorEventArgs : EventArgs
     {
-        public bool DoorClosed { get; set; }
+        //public bool DoorClosed { set; }
+
+        private bool _doorClosed;
+
+        public bool DoorClosed
+        {
+            set { _doorClosed = value; }
+            get { return _doorClosed; }
+        }
     }
 
     public interface IDoor

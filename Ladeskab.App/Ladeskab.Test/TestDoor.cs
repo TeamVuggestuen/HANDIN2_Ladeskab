@@ -14,13 +14,18 @@ namespace Ladeskab.Test
     public class TestDoor
     {
         public Door _uut;
-        
+        private DoorEventArgs _recievedDoorEventArgs;
+
        [SetUp]
         public void Setup()
         {
+            _recievedDoorEventArgs = null;
             _uut = new Door();
 
-
+            _uut.DoorEvent += (o, args) =>
+            {
+                _recievedDoorEventArgs = args;
+            };
         }
 
         [Test]
@@ -57,23 +62,50 @@ namespace Ladeskab.Test
             _uut.OnDoorOpen();
             
             //Assert
-            Assert.That(_uut.doorIsLocked, Is.False);
-
+            Assert.That(_uut.doorIsClosed, Is.False);
         }
 
         [Test]
-        public void CheckOnDoorIsClose()
+        public void CheckOnDoorIsOpenWhenOpen()
+        {
+            //Arrange
+            //Setup
+
+            //Act
+            _uut.doorIsClosed = false;
+            _uut.OnDoorOpen();
+
+            //Assert
+            Assert.That(_uut.doorIsLocked, Is.False);
+        }
+
+
+        [Test]
+        public void CheckOnDoorIsClosed()
         {
             //Arrange
                 //Setup
 
             //Act
             _uut.OnDoorClosed();
-            _uut.doorIsLocked = true;
-            
+
             //Assert
             Assert.That(_uut.doorIsLocked, Is.True);
+        }
 
+
+        [Test]
+        public void CheckOnDoorIsClosedWhenClosed()
+        {
+            //Arrange
+            //Setup
+
+            //Act
+            _uut.doorIsClosed = true;
+            _uut.OnDoorClosed();
+
+            //Assert
+            Assert.That(_uut.doorIsLocked, Is.True);
         }
 
         [Test]
@@ -109,6 +141,25 @@ namespace Ladeskab.Test
             //Assert
             Assert.That(numValues, Is.EqualTo(3));
         }
+
+
+        [Test]
+        public void CheckOnSendArg_OnOpenDoor()
+        {
+            _uut.OnDoorOpen();
+            Assert.That(_recievedDoorEventArgs.DoorClosed,
+                Is.EqualTo(false));
+        }
+
+
+        [Test]
+        public void CheckOnSendArg_OnOpenClosed()
+        {
+            _uut.OnDoorClosed();
+            Assert.That(_recievedDoorEventArgs.DoorClosed,
+                Is.EqualTo(true));
+        }
+
 
         [Test]
         public void lockDoor_doorIsLocked()
