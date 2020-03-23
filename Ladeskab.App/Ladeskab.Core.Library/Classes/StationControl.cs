@@ -23,14 +23,24 @@ namespace Ladeskab
         public IChargeControl _chargeControl;
         public IDoor _Door;
         public IDisplay _Display;
+        
+        //private int _oldId { get; set; }
+        
         private int _oldId;
+
+        public int OldId
+        {
+            get { return _oldId; }
+            private set { _oldId = value; }
+        }
+
 
 
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
-        private IDoor door;
-        private IChargeControl chargeControl;
-        private IDisplay display;
-        private IRfidReader rfid;
+        //private IDoor door;
+        //private IChargeControl chargeControl;
+        //private IDisplay display;
+        //private IRfidReader rfid;
 
         public StationControl(IDoor Door, IDisplay display, IRfidReader RfidReader, IChargeControl chargeControl)
         {
@@ -38,7 +48,7 @@ namespace Ladeskab
             Door.DoorEvent += HandleDoorEvent;                  //attach to door event
             _Door = Door;
 
-            RfidReader.RfidEvent += HandleRfidEvent;            //attach to rfid event
+            RfidReader.RfidEvent += HandleRfidEvent;            //attach to rfid event 
 
             _Display = display;
 
@@ -47,13 +57,13 @@ namespace Ladeskab
             _state = LadeskabState.Available;
         }
 
-        public StationControl(IDoor door, IChargeControl chargeControl, IDisplay display, IRfidReader rfid)
-        {
-            this.door = door;
-            this.chargeControl = chargeControl;
-            this.display = display;
-            this.rfid = rfid;
-        }
+        //public StationControl(IDoor door, IChargeControl chargeControl, IDisplay display, IRfidReader rfid)
+        //{
+        //    this.door = door;
+        //    this.chargeControl = chargeControl;
+        //    this.display = display;
+        //    this.rfid = rfid;
+        //}
 
 
         private void HandleDoorEvent(object sender, DoorEventArgs e)
