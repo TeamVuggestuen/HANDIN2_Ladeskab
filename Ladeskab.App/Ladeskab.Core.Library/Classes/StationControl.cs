@@ -38,7 +38,7 @@ namespace Ladeskab
             Door.DoorEvent += HandleDoorEvent;                  //attach to door event
             _Door = Door;
 
-            RfidReader.RfidEvent += HandleRfidEvent;            //attach to rfid event
+            RfidReader.RfidEvent += HandleRfidEvent;            //attach to rfid event 
 
             _Display = display;
 
