@@ -65,28 +65,12 @@ namespace Ladeskab
         {
             doorIsClosed = true;
             OnDoorChanged(new DoorEventArgs { DoorClosed = doorIsClosed });
-
-            #region alt
-
-            //if (doorIsClosed) // kan evt fjernes (selvindlysende)
-            //{
-            //    Console.WriteLine("You're trying to close a closed door...");
-            //}
-            //else
-            //{
-            //    doorIsClosed = true;
-            //    OnDoorChanged(new DoorEventArgs { DoorClosed = doorIsClosed });
-            //}            
-
-            #endregion
         }
-
 
         #endregion
 
 
         // member functions for locking/unlocking door
-        // DISSE 2 FUNKTIONER ER KUN MED TIL AT VISE HVAD BRUGEREN ER I GANG MED, OG KALDER DERFOR VIDERE
         #region lock/unlock functions
 
         public void UnlockDoor()
@@ -94,7 +78,7 @@ namespace Ladeskab
             doorIsLocked = false;
         }
 
-        public void LockDoor() // fjern evt if sætningen // nemmere at teste
+        public void LockDoor() 
         {
             doorIsLocked = true;
         }

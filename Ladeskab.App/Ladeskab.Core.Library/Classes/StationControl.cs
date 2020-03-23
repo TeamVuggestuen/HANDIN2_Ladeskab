@@ -27,7 +27,10 @@ namespace Ladeskab
 
 
         private string logFile = "logfile.txt"; // Navnet på systemets log-fil
-
+        private IDoor door;
+        private IChargeControl chargeControl;
+        private IDisplay display;
+        private IRfidReader rfid;
 
         public StationControl(IDoor Door, IDisplay display, IRfidReader RfidReader, IChargeControl chargeControl)
         {
@@ -44,8 +47,15 @@ namespace Ladeskab
             _state = LadeskabState.Available;
         }
 
+        public StationControl(IDoor door, IChargeControl chargeControl, IDisplay display, IRfidReader rfid)
+        {
+            this.door = door;
+            this.chargeControl = chargeControl;
+            this.display = display;
+            this.rfid = rfid;
+        }
 
-        #region HandleDoorEvent
+
         private void HandleDoorEvent(object sender, DoorEventArgs e)
         {
             doorStateChangeDetected(e);
@@ -83,52 +93,6 @@ namespace Ladeskab
             }
         }
 
-        #region team David alt
-
-        //private void HandleDoorEvent(object sender, DoorEventArgs e)
-        //{
-        //    switch (_state)
-        //    {
-        //        case LadeskabState.Available:
-        //            doorOpenedEvent(e);
-        //            break;
-        //        case LadeskabState.DoorOpen:
-        //            doorClosedEvent(e);
-        //            break;
-        //        case LadeskabState.Locked:
-        //            _Display.DisplayLockerOccupied();
-        //    }
-        //}
-
-        //private void doorOpenedEvent(DoorEventArgs e)
-        //{
-        //    if (!e.DoorClosed)
-        //    {
-        //        _Display.ConnectPhoneRequest();
-        //        _state = LadeskabState.DoorOpen;
-        //    }
-        //    else
-        //    {
-        //        _Display.RemovePhoneRequest();
-        //    }
-        //}
-
-        //private void doorClosedEvent(DoorEventArgs e)
-        //{
-        //    if (e.DoorClosed)
-        //    {
-        //        _Display.ReadRFIDRequest();
-        //        _state = LadeskabState.Available;
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("");
-        //    }
-        //}        
-
-        #endregion
-
-        #endregion
 
 
         #region rfidDetected (Eventhandler)

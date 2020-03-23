@@ -87,38 +87,8 @@ namespace Ladeskab.Core.Library.Classes
                 // oldcurrent = e.Current;
             }
 
-            //switch (_cstate)
-            //{
-            //    case ChargerState.Connected:
-            //        _chargerDisplay.displayCommands(Connectedmessage);
-            //        break;
-            //    case ChargerState.FullyCharged:
-            //        _chargerDisplay.displayCommands(Chargedmessage);
-            //        break;
-            //    case ChargerState.overload:
-            //        _chargerDisplay.displayCommands(Overloadmessage);
-            //        break;
-            //}
-
         }
 
-        #region alt
-
-        //private void HandleChargerEvent(object sender, DoorEventArgs e)
-        //{
-        //    chargerStateChangeDetected(e);
-        //}
-
-        //private void chargerStateChangeDetected(CurrentEventArgs e)
-        //{
-        //    switch (_cstate)
-        //    {
-        //        case ChargerState.Connected:
-        //            _chargerDisplay.displayCommands();
-        //    }
-        //}
-
-        #endregion
 
 
         public bool isConnected()

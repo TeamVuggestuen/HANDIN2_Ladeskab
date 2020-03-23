@@ -15,23 +15,11 @@ namespace Ladeskab.Test
     {
         public Door _uut;
         
-        //public EventArgs _receivedEventArgs;
-        //
-        //public StationControl _Control;
-
-        [SetUp]
+       [SetUp]
         public void Setup()
         {
             _uut = new Door();
 
-            ////Tjekker på events
-            //_receivedEventArgs = null;
-
-            //_uut.DoorEvent +=
-            //    (o, args) =>
-            //    {
-            //        _receivedEventArgs = args;
-            //    };
 
         }
 
@@ -148,34 +136,7 @@ namespace Ladeskab.Test
             Assert.That(_uut.doorIsLocked, Is.False);
         }
 
-        //[Test]
-        //public void DoorClosed_Get_status()
-        //{
-        //    //Arrange
-        //        IDoor _uut = new Door();
-
-        //    //Act    
-        //    _uut.
-
-        //    //Assert
-        //    Assert.That(_uut.doorIsLocked, Is.False);
-        //}
-
-        //[Test]
-        //public void CheckOnDoorIsOpenEvent()
-        //{
-
-        //    // Arrange
-        //    _uut = Substitute.For<Door>();
-
-        //    //Act
-        //    var wasCalledClose = false;
-        //    _uut.DoorEvent += (sender, args) => wasCalledClose = true;
-        //    _uut.DoorEvent += Raise.EventWith(new DoorEventArgs()); // Kan ikke invoke vores event sådan.. 
-
-        //    //Assert
-        //    Assert.True(wasCalledClose);
-        //}
+       
     }
 
 

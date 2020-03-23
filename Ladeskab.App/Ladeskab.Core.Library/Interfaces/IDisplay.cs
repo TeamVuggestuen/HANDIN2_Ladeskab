@@ -11,19 +11,5 @@ namespace Ladeskab
         // kald som Controls skal kunne foretage på et display
         void displayCommands(string command);
 
-        #region altern
-
-        //void ConnectPhoneRequest();
-        //void RemovePhoneRequest();
-        //void ReadRFIDRequest();
-
-        //void DisplayConnectionError();
-        //void DisplayLockerOccupied();
-        //void DisplayRFIDError();
-
-        //void Error();        
-
-        #endregion
-
     }
 }

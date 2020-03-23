@@ -12,45 +12,43 @@ using NSubstitute;
 
 namespace Ladeskab.Test
 {
-    [TestFixture]
-    public class TestStationControl
-    {
-        private StationControl _uut;
-        private Door _door;
-        private Display _display;
-        private RfidReader _rfidReader;
-        private UsbChargerSimulator _usbChargerSimulator;
-        private ChargeControl _chargeControl;
+    //[TestFixture]
+    //public class TestStationControl
+    //{
 
-        [SetUp]
-        public void Setup()
-        {
-            _door = Substitute.For<Door>();
-            _display = Substitute.For<Display>();
-            _rfidReader = Substitute.For<RfidReader>();
-            _usbChargerSimulator = Substitute.For<UsbChargerSimulator>();
-            _chargeControl = new ChargeControl(_usbChargerSimulator, _display);
-            _uut = new StationControl(_door, _display, _rfidReader, _chargeControl);
-        }
+    //    private StationControl _uut;
+    //    private IDoor _door;
+    //    private IDisplay _display;
+    //    private IRfidReader _rfid;
+    //    private IChargeControl _chargeControl;
 
-        //[Test]
-        //public void Ladeskab_teststate()
-        //{
-        //    //Arrange
-        //        //Setup
-        //_uut.
-        //    //Act
-        //    _door.OnDoorOpen();
-            
+    //    [SetUp]
+    //    public void Setup()
+    //    {
 
-        //       //Assert
-        //    Assert.That(_display.Text, Is.EqualTo("Connect phone (and close door(press 'r'))"));
+    //        _door = Substitute.For<IDoor>();
+    //        _display = Substitute.For<IDisplay>();
+    //        _rfid = Substitute.For<IRfidReader>();
+    //        _chargeControl = Substitute.For<IChargeControl>();
 
-        //}
+    //        _uut = new StationControl(_door, _chargeControl, _display, _rfid);
 
+    //    }
+
+    //    [Test]
+    //    public void TestRfidDetected_Available_testDoorlocking()
+    //    {
+    //        _chargeControl.isConnected().Returns(true);
+
+    //        _rfid.RfidEvent += Raise.EventWith(new RfidEventArgs() { Rfid_ID = 1234 });
+
+    //        _door.Received().LockDoor();
+
+    //        Assert.That(  Is.EqualTo(1234));
+    //    }
 
 
 
 
-    }
+    //}
 }
