@@ -135,6 +135,7 @@ namespace Ladeskab.Test
         }
 
 
+
         [Test]
         public void TestRfidDetected_Available_checkStartCharge()
         {
@@ -175,6 +176,21 @@ namespace Ladeskab.Test
             //Assert
             Assert.That(_uut.OldId, Is.EqualTo(1234));
         }
+
+
+        //[Test]
+        //public void TestRfidDetected_DoorOpen_doNothing()
+        //{
+        //    //Assert
+        //    _door.DoorEvent +=
+        //        Raise.EventWith(new DoorEventArgs() { DoorClosed = false });
+
+        //    //Act
+        //    _rfid.RfidEvent += Raise.EventWith(new RfidEventArgs() { Rfid_ID = 1234 });
+
+        //    //Assert
+        //    _display.DidNotReceive().displayCommands(Arg.Any<string>());
+        //}
 
 
         [Test]
