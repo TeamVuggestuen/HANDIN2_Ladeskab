@@ -16,18 +16,18 @@ namespace Ladeskab.Core.Library.Classes
 
         #region alt
 
-        public bool fullycharged { get; set; }
+        //public bool fullycharged { get; set; }
 
-        // Enum med tilstande
-        private enum ChargerState
-        {
-            Connected,
-            FullyCharged,
-            overload,
-            disconnected
-        };
+        //// Enum med tilstande
+        //private enum ChargerState
+        //{
+        //    Connected,
+        //    FullyCharged,
+        //    overload,
+        //    disconnected
+        //};
 
-        private ChargerState _cstate;
+        //private ChargerState _cstate;
 
         #endregion
 
@@ -41,7 +41,7 @@ namespace Ladeskab.Core.Library.Classes
             charger.CurrentValueEvent += HandleChargerEvent;
             _charger = charger;
             _chargerDisplay = chargerDisplay;
-            _cstate = ChargerState.disconnected;
+            //_cstate = ChargerState.disconnected;
         }
 
         private void HandleChargerEvent(object sender, CurrentEventArgs e)
@@ -58,9 +58,8 @@ namespace Ladeskab.Core.Library.Classes
                 {
                     _chargerDisplay.displayCommands(Chargedmessage);
                 }
-                //_chargerDisplay.displayCommands(Chargedmessage);
-                _cstate = ChargerState.FullyCharged;
-                //oldcurrent = e.Current;
+                //_cstate = ChargerState.FullyCharged;
+
             }
             else if (e.Current > 5 && e.Current <= 500)    //&& !(5 < oldcurrent && oldcurrent < 500)
             {
@@ -72,7 +71,7 @@ namespace Ladeskab.Core.Library.Classes
                 }
                 //_chargerDisplay.displayCommands(Connectedmessage);
                 oldcurrent = e.Current;
-                _cstate = ChargerState.Connected;
+                //_cstate = ChargerState.Connected;
             }
             else if (e.Current > 500)
             {
@@ -83,7 +82,7 @@ namespace Ladeskab.Core.Library.Classes
                     _chargerDisplay.displayCommands(Overloadmessage);
                 }
                 //_chargerDisplay.displayCommands(Overloadmessage);
-                _cstate = ChargerState.overload;
+                //_cstate = ChargerState.overload;
                 // oldcurrent = e.Current;
             }
 
