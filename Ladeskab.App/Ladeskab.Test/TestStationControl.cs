@@ -38,13 +38,13 @@ namespace Ladeskab.Test
         [Test]
         public void TestDoorStateChangedDetected_Available_DoorClosedFalse_Display()
         {
-            //Assert
+            //Arrange
             // _chargeControl.isConnected().Returns(false);
 
             //Act
             _door.DoorEvent +=
                 Raise.EventWith(new DoorEventArgs() { DoorClosed = false });
-
+            //Assert
             _display.Received().displayCommands("Connect phone (and close door(press 'C'))");
         }
 
@@ -52,13 +52,14 @@ namespace Ladeskab.Test
         [Test]
         public void TestDoorStateChangedDetected_Available_DoorClosedTrue_Display()
         {
-            //Assert
+            //Arrange
             // _chargeControl.isConnected().Returns(false);
 
             //Act
             _door.DoorEvent +=
                 Raise.EventWith(new DoorEventArgs() { DoorClosed = true });
 
+            //Assert
             _display.Received().displayCommands("Error");
         }
 
@@ -66,7 +67,7 @@ namespace Ladeskab.Test
         [Test]
         public void TestDoorStateChangedDetected_DoorOpen_DoorClosedTrue_Display()
         {
-            //Assert
+            //Arrange
             // _chargeControl.isConnected().Returns(false);
 
             //Act
@@ -75,6 +76,7 @@ namespace Ladeskab.Test
             _door.DoorEvent +=
                 Raise.EventWith(new DoorEventArgs() { DoorClosed = true });
 
+            //Assert
             _display.Received().displayCommands("Read rfid (press 'R')");
         }
 
@@ -82,7 +84,7 @@ namespace Ladeskab.Test
         [Test]
         public void TestDoorStateChangedDetected_DoorOpen_DoorClosedFalse_Display()
         {
-            //Assert
+            //Arrange
             // _chargeControl.isConnected().Returns(false);
             //Act
             _door.DoorEvent +=
@@ -90,6 +92,7 @@ namespace Ladeskab.Test
             _door.DoorEvent +=
                 Raise.EventWith(new DoorEventArgs() { DoorClosed = false });
 
+            //Assert
             _display.Received().displayCommands("Error");
         }
 
@@ -97,14 +100,16 @@ namespace Ladeskab.Test
         [Test]
         public void TestDoorStateChangedDetected_DoorLockedFalse_Display()
         {
-            //Assert
+            //Arrange
             _chargeControl.isConnected().Returns(true);
             _rfid.RfidEvent +=
                 Raise.EventWith(new RfidEventArgs() { Rfid_ID = 1234 });
+           
             //Act
             _door.DoorEvent +=
                 Raise.EventWith(new DoorEventArgs() { DoorClosed = false });
-
+            
+            //Assert
             _display.Received().displayCommands("Locker is occupied");
         }
 
@@ -112,14 +117,16 @@ namespace Ladeskab.Test
         [Test]
         public void TestDoorStateChangedDetected_DoorLockedTrue_Display()
         {
-            //Assert
+            //Arrange
             _chargeControl.isConnected().Returns(true);
             _rfid.RfidEvent +=
                 Raise.EventWith(new RfidEventArgs() { Rfid_ID = 1234 });
+            
             //Act
             _door.DoorEvent +=
                 Raise.EventWith(new DoorEventArgs() { DoorClosed = true });
-
+            
+            //Assert
             _display.Received().displayCommands("Locker is occupied");
         }
 
@@ -127,10 +134,13 @@ namespace Ladeskab.Test
         [Test]
         public void TestRfidDetected_Available_checkLockDoor()
         {
+            //Arrange
             _chargeControl.isConnected().Returns(true);
 
+            //act
             _rfid.RfidEvent += Raise.EventWith(new RfidEventArgs() { Rfid_ID = 1234 });
 
+            //Assert
             _door.Received().LockDoor(); // spørg Frank i morgen
         }
 
@@ -139,10 +149,13 @@ namespace Ladeskab.Test
         [Test]
         public void TestRfidDetected_Available_checkStartCharge()
         {
+            //Arrange
             _chargeControl.isConnected().Returns(true);
 
+            //Act
             _rfid.RfidEvent += Raise.EventWith(new RfidEventArgs() { Rfid_ID = 1234 });
 
+            //Assert
             _chargeControl.Received().StartCharge();
         }
 
@@ -150,15 +163,16 @@ namespace Ladeskab.Test
         [Test]
         public void TestRfidDetected_Locked_testStopCharging()
         {
-            //Act
+            //Arrange
             _chargeControl.isConnected().Returns(true);
 
+            //Act
             _rfid.RfidEvent +=
                 Raise.EventWith(new RfidEventArgs() { Rfid_ID = 1234 });
             _rfid.RfidEvent +=
                 Raise.EventWith(new RfidEventArgs() { Rfid_ID = 1234 });
 
-                //Assert
+            //Assert
             _chargeControl.Received().StopCharge();
         }
 
@@ -166,7 +180,7 @@ namespace Ladeskab.Test
         [Test]
         public void TestRfidDetected_Available_checkOldId()
         {
-            //Assert
+            //Arrange
             _chargeControl.isConnected().Returns(true);
 
             //Act
@@ -196,7 +210,7 @@ namespace Ladeskab.Test
         [Test]
         public void TestRfidDetected_Locked_checkOldId()
         {
-            //Assert
+            //Arrange
             _chargeControl.isConnected().Returns(true);
 
             //Act
@@ -213,11 +227,14 @@ namespace Ladeskab.Test
         [Test]
         public void TestRfidDetected_Available_checkNotConnected()
         {
+            //Arrange
             _chargeControl.isConnected().Returns(false);
 
+            //Act
             _rfid.RfidEvent +=
                 Raise.EventWith(new RfidEventArgs() { Rfid_ID = 1234 });
-
+            
+            //Assert
             _display.Received().displayCommands("Din telefon er ikke ordentlig tilsluttet. Prøv igen.");
         }
 
@@ -225,14 +242,17 @@ namespace Ladeskab.Test
         [Test]
         public void TestRfidDetected_Locked_WrongRfidTag()
         {
+            //Arrange
             _chargeControl.isConnected().Returns(true);
 
+            //Act
             _rfid.RfidEvent +=
                 Raise.EventWith(new RfidEventArgs() { Rfid_ID = 1234 });
 
             _rfid.RfidEvent +=
                 Raise.EventWith(new RfidEventArgs() { Rfid_ID = 4321 });
 
+            //Assert
             Assert.That(_uut.OldId, Is.Not.EqualTo(4321));
             //_display.Received().displayCommands("Forkert RFID tag.");
         }

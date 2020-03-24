@@ -8,7 +8,7 @@ namespace Ladeskab.Core.Library.Classes
         public IUsbCharger _charger;
         public IDisplay _chargerDisplay;
 
-        int temp1 = 0;
+        private int _countToPrintOnce = 0;
 
         private double oldcurrent { get; set; }
 
@@ -53,8 +53,8 @@ namespace Ladeskab.Core.Library.Classes
             else if (e.Current > 0 && e.Current <= 5)
             {
                 Connected = true;
-                temp1++;
-                if (temp1==1)
+                _countToPrintOnce++;
+                if (_countToPrintOnce==1)
                 {
                     _chargerDisplay.displayCommands(Chargedmessage);
                 }
@@ -65,8 +65,8 @@ namespace Ladeskab.Core.Library.Classes
             else if (e.Current > 5 && e.Current <= 500)    //&& !(5 < oldcurrent && oldcurrent < 500)
             {
                 Connected = true;
-                temp1++;
-                if (temp1 == 1)
+                _countToPrintOnce++;
+                if (_countToPrintOnce == 1)
                 {
                     _chargerDisplay.displayCommands(Connectedmessage);
                 }
@@ -77,8 +77,8 @@ namespace Ladeskab.Core.Library.Classes
             else if (e.Current > 500)
             {
                 Connected = true;
-                temp1++;
-                if (temp1 == 1)
+                _countToPrintOnce++;
+                if (_countToPrintOnce == 1)
                 {
                     _chargerDisplay.displayCommands(Overloadmessage);
                 }
