@@ -85,7 +85,6 @@ namespace Ladeskab.Core.Library.Classes
                 //_cstate = ChargerState.overload;
                 // oldcurrent = e.Current;
             }
-
         }
 
 
