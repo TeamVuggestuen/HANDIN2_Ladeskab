@@ -5,31 +5,15 @@ namespace Ladeskab.Core.Library.Classes
 {
     public class ChargeControl : IChargeControl
     {
-        public IUsbCharger _charger;
-        public IDisplay _chargerDisplay;
+        private IUsbCharger _charger;
+        private IDisplay _chargerDisplay;
 
         private int _countToPrintOnce = 0;
 
-        //private double oldcurrent { get; set; }
+        private double oldcurrent { get; set; }
 
         public bool Connected { get; set; }
 
-        #region alt
-
-        //public bool fullycharged { get; set; }
-
-        //// Enum med tilstande
-        //private enum ChargerState
-        //{
-        //    Connected,
-        //    FullyCharged,
-        //    overload,
-        //    disconnected
-        //};
-
-        //private ChargerState _cstate;
-
-        #endregion
 
         public string Overloadmessage = "Kortslutning. Fjern telefonen.";
         public string Connectedmessage = "Telefonen er tilsluttet og lader";
@@ -41,7 +25,6 @@ namespace Ladeskab.Core.Library.Classes
             charger.CurrentValueEvent += HandleChargerEvent;
             _charger = charger;
             _chargerDisplay = chargerDisplay;
-            //_cstate = ChargerState.disconnected;
         }
 
         private void HandleChargerEvent(object sender, CurrentEventArgs e)
@@ -58,10 +41,8 @@ namespace Ladeskab.Core.Library.Classes
                 {
                     _chargerDisplay.displayCommands(Chargedmessage);
                 }
-                //_cstate = ChargerState.FullyCharged;
-
             }
-            else if (e.Current > 5 && e.Current <= 500)    //&& !(5 < oldcurrent && oldcurrent < 500)
+            else if (e.Current > 5 && e.Current <= 500)
             {
                 Connected = true;
                 _countToPrintOnce++;
@@ -69,9 +50,7 @@ namespace Ladeskab.Core.Library.Classes
                 {
                     _chargerDisplay.displayCommands(Connectedmessage);
                 }
-                //_chargerDisplay.displayCommands(Connectedmessage);
-                //oldcurrent = e.Current;
-                //_cstate = ChargerState.Connected;
+                oldcurrent = e.Current;
             }
             else if (e.Current > 500)
             {
@@ -81,12 +60,8 @@ namespace Ladeskab.Core.Library.Classes
                 {
                     _chargerDisplay.displayCommands(Overloadmessage);
                 }
-                //_chargerDisplay.displayCommands(Overloadmessage);
-                //_cstate = ChargerState.overload;
-                // oldcurrent = e.Current;
             }
         }
-
 
 
         public bool isConnected()

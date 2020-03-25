@@ -9,8 +9,6 @@ namespace Ladeskab
 {
     public class DoorEventArgs : EventArgs
     {
-        //public bool DoorClosed { set; }
-
         private bool _doorClosed;
 
         public bool DoorClosed
