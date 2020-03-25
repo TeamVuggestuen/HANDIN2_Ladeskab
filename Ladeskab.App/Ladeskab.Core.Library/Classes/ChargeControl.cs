@@ -10,7 +10,7 @@ namespace Ladeskab.Core.Library.Classes
 
         private int _countToPrintOnce = 0;
 
-        private double oldcurrent { get; set; }
+        //private double oldcurrent { get; set; }
 
         public bool Connected { get; set; }
 
@@ -70,7 +70,7 @@ namespace Ladeskab.Core.Library.Classes
                     _chargerDisplay.displayCommands(Connectedmessage);
                 }
                 //_chargerDisplay.displayCommands(Connectedmessage);
-                oldcurrent = e.Current;
+                //oldcurrent = e.Current;
                 //_cstate = ChargerState.Connected;
             }
             else if (e.Current > 500)

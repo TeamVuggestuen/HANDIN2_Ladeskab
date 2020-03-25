@@ -57,14 +57,7 @@ namespace Ladeskab
             _state = LadeskabState.Available;
         }
 
-        //public StationControl(IDoor door, IChargeControl chargeControl, IDisplay display, IRfidReader rfid)
-        //{
-        //    this.door = door;
-        //    this.chargeControl = chargeControl;
-        //    this.display = display;
-        //    this.rfid = rfid;
-        //}
-
+       
 
         private void HandleDoorEvent(object sender, DoorEventArgs e)
         {
@@ -118,7 +111,7 @@ namespace Ladeskab
                     {
                         _Door.LockDoor();
                         _chargeControl.StartCharge();
-                        _oldId = id;
+                        OldId = id;
                         using (var writer = File.AppendText(logFile))
                         {
                             //writer.WriteLine(DateTime.Now.ToLongDateString() + ": Skab låst med RFID: " + id.ToString());

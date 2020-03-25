@@ -53,7 +53,7 @@ namespace Ladeskab.Test
         public void TestDoorStateChangedDetected_Available_DoorClosedTrue_Display()
         {
             //Arrange
-            // _chargeControl.isConnected().Returns(false);
+                // _chargeControl.isConnected().Returns(false);
 
             //Act
             _door.DoorEvent +=

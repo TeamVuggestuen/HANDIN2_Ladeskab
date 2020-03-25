@@ -107,6 +107,48 @@ namespace Ladeskab.Test
         }
 
 
+        [Test]
+        public void TestHandleChargerEvent_Overload_BorderCurrentNotValid_NoDisplay()
+        {
+            //Arrange
+            //Act
+            _usbCharger.CurrentValueEvent +=
+                Raise.EventWith(new CurrentEventArgs() { Current = 500 });
+
+            //Assert
+            _display.DidNotReceive().displayCommands(_uut.Overloadmessage);
+            //Assert.That(_uut.Connected, Is.EqualTo(false));
+        }
+
+
+        [Test]
+        public void TestHandleChargerEvent_Overload_LowerBorderCurrentNotValid_NoDisplay()
+        {
+            //Arrange
+            //Act
+            _usbCharger.CurrentValueEvent +=
+                Raise.EventWith(new CurrentEventArgs() { Current = 500.5 });
+
+            //Assert
+            _display.Received().displayCommands(_uut.Overloadmessage);
+            //Assert.That(_uut.Connected, Is.EqualTo(false));
+        }
+
+
+        [Test]
+        public void TestHandleChargerEvent_Overload_UpperBorderCurrentNotValid_NoDisplay()
+        {
+            //Arrange
+            //Act
+            _usbCharger.CurrentValueEvent +=
+                Raise.EventWith(new CurrentEventArgs() { Current = 600 });
+
+            //Assert
+            _display.Received().displayCommands(_uut.Overloadmessage);
+            //Assert.That(_uut.Connected, Is.EqualTo(false));
+        }
+
+
         [TestCase(true)]
         [TestCase(false)]
         public void TestIsConnected(bool Connected)
