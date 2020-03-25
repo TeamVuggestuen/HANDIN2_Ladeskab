@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ladeskab.Core.Library", "La
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ladeskab.Test", "Ladeskab.Test\Ladeskab.Test.csproj", "{57D44445-3572-4468-B3DC-6971544E71C3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Class Diagram", "Class Diagram", "{BC266300-1CC8-4E54-996C-C32EFF6980D2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CE40BC2E-FDD9-4EBD-9452-F23C04694230}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\Desktop\Untitled Diagram (1).png = ..\..\..\..\Desktop\Untitled Diagram (1).png
+		..\..\..\..\Desktop\classDiagram.jpg = ..\..\..\..\Desktop\classDiagram.jpg
 	EndProjectSection
 EndProject
 Global
