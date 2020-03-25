@@ -14,7 +14,7 @@ namespace Ladeskab.Core.Library.Classes
 
         public bool Connected { get; set; }
 
-
+        // beskeder
         public string Overloadmessage = "Kortslutning. Fjern telefonen.";
         public string Connectedmessage = "Telefonen er tilsluttet og lader";
         public string Chargedmessage = "Telefonen er fuldt opladet. Fjern telefonen.";
