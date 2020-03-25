@@ -41,24 +41,6 @@ namespace Ladeskab
         {
             doorIsClosed = false;
             OnDoorChanged(new DoorEventArgs { DoorClosed = doorIsClosed });
-
-            #region alt
-
-            //if (doorIsLocked)
-            //{
-            //    Console.WriteLine("Door is locked. Scan rfid to unlock"); // bliver håndteret i station control og på denne måde skal vi ikke kommunikere med display fra døren
-            //}
-            //else if (!doorIsClosed) // kan evt fjernes (selvindlysende)
-            //{
-            //    Console.WriteLine("You're trying to open an open door");
-            //}
-            //else if (!doorIsLocked)
-            //{
-            //    doorIsClosed = false;
-            //    OnDoorChanged(new DoorEventArgs { DoorClosed = doorIsClosed });
-            //}            
-
-            #endregion
         }
 
         public void OnDoorClosed()
